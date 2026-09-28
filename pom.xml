@@ -10,4 +10,5 @@
         <maven.compiler.release>26</maven.compiler.release>
         <exec.mainClass>com.mycompany.klinikhewan.KlinikHewan</exec.mainClass>
     </properties>
+    <name>UTSPBOKlinikHewan</name>
 </project>

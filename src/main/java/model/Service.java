@@ -12,23 +12,43 @@ public class Service {
     private Scanner scanner;
 
     public Service(Scanner scanner) {
-        this.daftarHewan = new ArrayList<>();
-        this.daftarPemilik = new ArrayList<>();
-        this.daftarPemeriksaan = new ArrayList<>();
+
+        daftarHewan = new ArrayList<>();
+        daftarPemilik = new ArrayList<>();
+        daftarPemeriksaan = new ArrayList<>();
+
         this.scanner = scanner;
 
-        // Dummy data awal
-        daftarHewan.add(new Kucing(1, "Milo", 2, "Sudah"));
-        daftarPemilik.add(new Pemilik(1, "Fatim", "081234567890"));
-        daftarPemeriksaan.add(new Pemeriksaan(1, "Tidak mau makan", "Gangguan pencernaan"));
+        // Data awal
+        daftarHewan.add(
+                new Kucing(1, "Milo", 2, "Sudah")
+        );
+
+        daftarPemilik.add(
+                new Pemilik(1, "Fatim", "081234567890")
+        );
+
+        daftarPemeriksaan.add(
+                new Pemeriksaan(
+                        1,
+                        "Tidak mau makan",
+                        "Gangguan pencernaan"
+                )
+        );
     }
 
+    // =====================================================
     // TAMBAH DATA
+    // =====================================================
+
     public void tambahData() {
 
         System.out.println("\n=== TAMBAH DATA KLINIK ===");
 
-        // Input ID
+        // -------------------------
+        // ID DATA
+        // -------------------------
+
         int idData;
 
         while (true) {
@@ -41,35 +61,51 @@ public class Service {
                 scanner.nextLine();
 
                 if (idData < 0) {
-                    System.out.println(">> ID tidak boleh negatif!");
-                }
-                else {
+
+                    System.out.println(
+                            ">> ID tidak boleh negatif!"
+                    );
+
+                } else {
 
                     boolean idSudahAda = false;
 
                     for (Hewan h : daftarHewan) {
+
                         if (h.getIdData() == idData) {
+
                             idSudahAda = true;
                             break;
                         }
                     }
 
                     if (idSudahAda) {
-                        System.out.println(">> ID sudah terdaftar! Silahkan gunakan ID lain!");
-                    }
-                    else {
+
+                        System.out.println(
+                                ">> ID sudah terdaftar! "
+                                + "Silahkan gunakan ID lain!"
+                        );
+
+                    } else {
+
                         break;
                     }
                 }
 
-            }
-            else {
-                System.out.println(">> ID harus berupa angka!");
+            } else {
+
+                System.out.println(
+                        ">> ID harus berupa angka!"
+                );
+
                 scanner.nextLine();
             }
         }
 
-        // Data Pemilik
+        // -------------------------
+        // DATA PEMILIK
+        // -------------------------
+
         System.out.println("\n--- Data Pemilik ---");
 
         String namaPemilik;
@@ -80,9 +116,13 @@ public class Service {
             namaPemilik = scanner.nextLine();
 
             if (namaPemilik.isEmpty()) {
-                System.out.println(">> Nama pemilik tidak boleh kosong!");
-            }
-            else {
+
+                System.out.println(
+                        ">> Nama pemilik tidak boleh kosong!"
+                );
+
+            } else {
+
                 break;
             }
         }
@@ -95,24 +135,42 @@ public class Service {
             noTelepon = scanner.nextLine();
 
             if (noTelepon.isEmpty()) {
-                System.out.println(">> No. telepon tidak boleh kosong!");
-            }
-            else if (noTelepon.length() < 10) {
-                System.out.println(">> No. telepon minimal 10 digit!");
-            }
-            else if (noTelepon.length() > 13) {
-                System.out.println(">> No. telepon maksimal 13 digit!");
-            }
-            else {
+
+                System.out.println(
+                        ">> No. telepon tidak boleh kosong!"
+                );
+
+            } else if (noTelepon.length() < 10) {
+
+                System.out.println(
+                        ">> No. telepon minimal 10 digit!"
+                );
+
+            } else if (noTelepon.length() > 13) {
+
+                System.out.println(
+                        ">> No. telepon maksimal 13 digit!"
+                );
+
+            } else {
+
                 break;
             }
         }
 
-        Pemilik pemilikBaru = new Pemilik(idData, namaPemilik, noTelepon);
+        Pemilik pemilikBaru =
+                new Pemilik(
+                        idData,
+                        namaPemilik,
+                        noTelepon
+                );
 
         daftarPemilik.add(pemilikBaru);
 
-        // Data Hewan
+        // -------------------------
+        // DATA HEWAN
+        // -------------------------
+
         System.out.println("\n--- Data Hewan ---");
 
         String namaHewan;
@@ -123,29 +181,81 @@ public class Service {
             namaHewan = scanner.nextLine();
 
             if (namaHewan.isEmpty()) {
-                System.out.println(">> Nama hewan tidak boleh kosong!");
-            }
-            else {
+
+                System.out.println(
+                        ">> Nama hewan tidak boleh kosong!"
+                );
+
+            } else {
+
                 break;
             }
         }
+
+        // -------------------------
+        // JENIS HEWAN
+        // -------------------------
 
         String jenisHewan;
 
         while (true) {
 
-            System.out.print("Jenis Hewan: ");
+            System.out.println("\nJenis Hewan:");
+            System.out.println("1. Kucing");
+            System.out.println("2. Kucing Persia");
+            System.out.println("3. Anjing");
+            System.out.println("4. Hewan Lain");
+
+            System.out.print("Pilih jenis: ");
+
             jenisHewan = scanner.nextLine();
 
-            if (jenisHewan.isEmpty()) {
-                System.out.println(">> Jenis hewan tidak boleh kosong!");
-            }
-            else {
+            if (jenisHewan.equals("1")) {
+
+                jenisHewan = "Kucing";
                 break;
+
+            } else if (jenisHewan.equals("2")) {
+
+                jenisHewan = "Kucing Persia";
+                break;
+
+            } else if (jenisHewan.equals("3")) {
+
+                jenisHewan = "Anjing";
+                break;
+
+            } else if (jenisHewan.equals("4")) {
+
+                System.out.print(
+                        "Masukkan jenis hewan: "
+                );
+
+                jenisHewan = scanner.nextLine();
+
+                if (jenisHewan.isEmpty()) {
+
+                    System.out.println(
+                            ">> Jenis hewan tidak boleh kosong!"
+                    );
+
+                } else {
+
+                    break;
+                }
+
+            } else {
+
+                System.out.println(
+                        ">> Pilihan jenis tidak valid!"
+                );
             }
         }
 
-        // Input Umur
+        // -------------------------
+        // UMUR HEWAN
+        // -------------------------
+
         int umur;
 
         while (true) {
@@ -158,73 +268,174 @@ public class Service {
                 scanner.nextLine();
 
                 if (umur < 0) {
-                    System.out.println(">> Umur tidak boleh negatif!");
-                }
-                else {
+
+                    System.out.println(
+                            ">> Umur tidak boleh negatif!"
+                    );
+
+                } else {
+
                     break;
                 }
 
-            }
-            else {
-                System.out.println(">> Umur harus berupa angka!");
+            } else {
+
+                System.out.println(
+                        ">> Umur harus berupa angka!"
+                );
+
                 scanner.nextLine();
             }
         }
 
+        // =====================================================
+        // PEMBUATAN OBJEK HEWAN
+        // =====================================================
+
         Hewan hewanBaru;
 
-        // Kucing
-        if (jenisHewan.equalsIgnoreCase("Kucing")) {
+        // -------------------------
+        // KUCING PERSIA
+        // -------------------------
+
+        if (jenisHewan.equalsIgnoreCase("Kucing Persia")) {
 
             String statusVaksinF3;
 
             while (true) {
 
-                System.out.print("Status Vaksin F3: ");
-                statusVaksinF3 = scanner.nextLine();
+                System.out.print(
+                        "Status Vaksin F3: "
+                );
+
+                statusVaksinF3 =
+                        scanner.nextLine();
 
                 if (statusVaksinF3.isEmpty()) {
-                    System.out.println(">> Status vaksin F3 tidak boleh kosong!");
-                }
-                else {
+
+                    System.out.println(
+                            ">> Status vaksin F3 "
+                            + "tidak boleh kosong!"
+                    );
+
+                } else {
+
                     break;
                 }
             }
 
-            hewanBaru = new Kucing(idData, namaHewan,umur, statusVaksinF3);
-        }
+            hewanBaru =
+                    new KucingPersia(
+                            idData,
+                            namaHewan,
+                            umur,
+                            statusVaksinF3
+                    );
 
-        // Anjing
-        else if (jenisHewan.equalsIgnoreCase("Anjing")) {
+        // -------------------------
+        // KUCING
+        // -------------------------
+
+        } else if (
+                jenisHewan.equalsIgnoreCase("Kucing")
+        ) {
+
+            String statusVaksinF3;
+
+            while (true) {
+
+                System.out.print(
+                        "Status Vaksin F3: "
+                );
+
+                statusVaksinF3 =
+                        scanner.nextLine();
+
+                if (statusVaksinF3.isEmpty()) {
+
+                    System.out.println(
+                            ">> Status vaksin F3 "
+                            + "tidak boleh kosong!"
+                    );
+
+                } else {
+
+                    break;
+                }
+            }
+
+            hewanBaru =
+                    new Kucing(
+                            idData,
+                            namaHewan,
+                            umur,
+                            statusVaksinF3
+                    );
+
+        // -------------------------
+        // ANJING
+        // -------------------------
+
+        } else if (
+                jenisHewan.equalsIgnoreCase("Anjing")
+        ) {
 
             String statusVaksinRabies;
 
             while (true) {
 
-                System.out.print("Status Vaksin Rabies: ");
-                statusVaksinRabies = scanner.nextLine();
+                System.out.print(
+                        "Status Vaksin Rabies: "
+                );
+
+                statusVaksinRabies =
+                        scanner.nextLine();
 
                 if (statusVaksinRabies.isEmpty()) {
-                    System.out.println(">> Status vaksin rabies tidak boleh kosong!");
-                }
-                else {
+
+                    System.out.println(
+                            ">> Status vaksin rabies "
+                            + "tidak boleh kosong!"
+                    );
+
+                } else {
+
                     break;
                 }
             }
 
-            hewanBaru = new Anjing(idData, namaHewan, umur, statusVaksinRabies
-            );
-        }
+            hewanBaru =
+                    new Anjing(
+                            idData,
+                            namaHewan,
+                            umur,
+                            statusVaksinRabies
+                    );
 
-        // Hewan Lain
-        else {
-            hewanBaru = new Hewan(idData, namaHewan, jenisHewan, umur);
+        // -------------------------
+        // HEWAN LAIN
+        // -------------------------
+
+        } else {
+
+            hewanBaru =
+                    new Hewan(
+                            idData,
+                            namaHewan,
+                            jenisHewan,
+                            umur
+                    );
         }
 
         daftarHewan.add(hewanBaru);
 
-        // Data Pemeriksaan
-        System.out.println("\n--- Data Pemeriksaan ---");
+        // =====================================================
+        // DATA PEMERIKSAAN
+        // =====================================================
+
+        System.out.println(
+                "\n--- Data Pemeriksaan ---"
+        );
 
         String keluhan;
 
@@ -234,9 +445,13 @@ public class Service {
             keluhan = scanner.nextLine();
 
             if (keluhan.isEmpty()) {
-                System.out.println(">> Keluhan tidak boleh kosong!");
-            }
-            else {
+
+                System.out.println(
+                        ">> Keluhan tidak boleh kosong!"
+                );
+
+            } else {
+
                 break;
             }
         }
@@ -249,156 +464,282 @@ public class Service {
             diagnosa = scanner.nextLine();
 
             if (diagnosa.isEmpty()) {
-                System.out.println(">> Diagnosa tidak boleh kosong!");
-            }
-            else {
+
+                System.out.println(
+                        ">> Diagnosa tidak boleh kosong!"
+                );
+
+            } else {
+
                 break;
             }
         }
 
-        Pemeriksaan pemeriksaanBaru = new Pemeriksaan(idData, keluhan, diagnosa);
+        Pemeriksaan pemeriksaanBaru =
+                new Pemeriksaan(
+                        idData,
+                        keluhan,
+                        diagnosa
+                );
 
-        daftarPemeriksaan.add(pemeriksaanBaru);
+        daftarPemeriksaan.add(
+                pemeriksaanBaru
+        );
 
-        System.out.println(">> Data klinik berhasil ditambahkan!");
+        System.out.println(
+                ">> Data klinik berhasil ditambahkan!"
+        );
     }
 
+    // =====================================================
     // TAMPILKAN DATA
+    // =====================================================
+
     public void tampilkanData() {
 
         if (daftarHewan.isEmpty()) {
-            System.out.println("\nBelum ada data klinik.");
+
+            System.out.println(
+                    "\nBelum ada data klinik."
+            );
+
             return;
         }
 
-        System.out.println("\n=== DATA KLINIK HEWAN ===");
+        System.out.println(
+                "\n=== DATA KLINIK HEWAN ==="
+        );
 
-        for (int i = 0; i < daftarHewan.size(); i++) {
+        for (int i = 0;
+                i < daftarHewan.size();
+                i++) {
 
             Hewan h = daftarHewan.get(i);
             Pemilik p = daftarPemilik.get(i);
-            Pemeriksaan pm = daftarPemeriksaan.get(i);
+            Pemeriksaan pm =
+                    daftarPemeriksaan.get(i);
 
-            System.out.println("\n=========================");
-            System.out.println("ID Data: " + h.getIdData());
+            System.out.println(
+                    "\n========================="
+            );
 
-            System.out.println("\n--- Data Pemilik ---");
-            System.out.println("Nama Pemilik: " + p.getNamaPemilik());
-            System.out.println("No. Telepon: " + p.getNoTelepon());
+            System.out.println(
+                    "ID Data: "
+                    + h.getIdData()
+            );
 
-            System.out.println("\n--- Data Hewan ---");
-            System.out.println("Nama Hewan: " + h.getNamaHewan());
-            System.out.println("Umur Hewan: " + h.getUmur());
+            System.out.println(
+                    "\n--- Data Pemilik ---"
+            );
 
-            // Polymorphism
+            System.out.println(
+                    "Nama Pemilik: "
+                    + p.getNamaPemilik()
+            );
+
+            System.out.println(
+                    "No. Telepon: "
+                    + p.getNoTelepon()
+            );
+
+            System.out.println(
+                    "\n--- Data Hewan ---"
+            );
+
+            System.out.println(
+                    "Nama Hewan: "
+                    + h.getNamaHewan()
+            );
+
+            System.out.println(
+                    "Umur Hewan: "
+                    + h.getUmur()
+            );
+
+            // Polymorphism - overriding
             h.tampilkanInfo();
 
-            System.out.println("\n--- Data Pemeriksaan ---");
-            System.out.println("Keluhan: " + pm.getKeluhan());
-            System.out.println("Diagnosa: " + pm.getDiagnosa());
+            System.out.println(
+                    "\n--- Data Pemeriksaan ---"
+            );
 
-            System.out.println("=========================");
+            System.out.println(
+                    "Keluhan: "
+                    + pm.getKeluhan()
+            );
+
+            System.out.println(
+                    "Diagnosa: "
+                    + pm.getDiagnosa()
+            );
+
+            System.out.println(
+                    "========================="
+            );
         }
     }
 
+    // =====================================================
     // HAPUS DATA
+    // =====================================================
+
     public void hapusData() {
 
         int idTarget;
 
         while (true) {
 
-            System.out.print("Masukkan ID Data: ");
+            System.out.print(
+                    "Masukkan ID Data: "
+            );
 
             if (scanner.hasNextInt()) {
 
-                idTarget = scanner.nextInt();
+                idTarget =
+                        scanner.nextInt();
+
                 scanner.nextLine();
 
                 if (idTarget < 0) {
-                    System.out.println(">> ID tidak boleh negatif!");
-                }
-                else {
+
+                    System.out.println(
+                            ">> ID tidak boleh negatif!"
+                    );
+
+                } else {
+
                     break;
                 }
 
-            }
-            else {
-                System.out.println(">> ID harus berupa angka!");
+            } else {
+
+                System.out.println(
+                        ">> ID harus berupa angka!"
+                );
+
                 scanner.nextLine();
             }
         }
 
-        for (int i = 0; i < daftarHewan.size(); i++) {
+        for (int i = 0;
+                i < daftarHewan.size();
+                i++) {
 
-            if (daftarHewan.get(i).getIdData() == idTarget) {
+            if (
+                    daftarHewan
+                            .get(i)
+                            .getIdData()
+                            == idTarget
+            ) {
 
                 daftarHewan.remove(i);
                 daftarPemilik.remove(i);
                 daftarPemeriksaan.remove(i);
 
-                System.out.println(">> Data klinik berhasil dihapus!");
+                System.out.println(
+                        ">> Data klinik berhasil dihapus!"
+                );
 
                 return;
             }
         }
 
-        System.out.println(">> Data tidak ditemukan!");
+        System.out.println(
+                ">> Data tidak ditemukan!"
+        );
     }
 
+    // =====================================================
     // UPDATE DATA
+    // =====================================================
+
     public void updateData() {
 
         int idTarget;
 
         while (true) {
 
-            System.out.print("Masukkan ID Data: ");
+            System.out.print(
+                    "Masukkan ID Data: "
+            );
 
             if (scanner.hasNextInt()) {
 
-                idTarget = scanner.nextInt();
+                idTarget =
+                        scanner.nextInt();
+
                 scanner.nextLine();
 
                 if (idTarget < 0) {
-                    System.out.println(">> ID tidak boleh negatif!");
-                }
-                else {
+
+                    System.out.println(
+                            ">> ID tidak boleh negatif!"
+                    );
+
+                } else {
+
                     break;
                 }
 
-            }
-            else {
-                System.out.println(">> ID harus berupa angka!");
+            } else {
+
+                System.out.println(
+                        ">> ID harus berupa angka!"
+                );
+
                 scanner.nextLine();
             }
         }
 
-        for (int i = 0; i < daftarHewan.size(); i++) {
+        for (int i = 0;
+                i < daftarHewan.size();
+                i++) {
 
-            Hewan h = daftarHewan.get(i);
+            Hewan h =
+                    daftarHewan.get(i);
 
             if (h.getIdData() == idTarget) {
 
-                Pemilik p = daftarPemilik.get(i);
-                Pemeriksaan pm = daftarPemeriksaan.get(i);
+                Pemilik p =
+                        daftarPemilik.get(i);
 
-                System.out.println("\n=== UPDATE DATA KLINIK ===");
+                Pemeriksaan pm =
+                        daftarPemeriksaan.get(i);
 
-                // Update Pemilik
-                System.out.println("\n--- Data Pemilik ---");
+                System.out.println(
+                        "\n=== UPDATE DATA KLINIK ==="
+                );
+
+                // =================================================
+                // UPDATE PEMILIK
+                // =================================================
+
+                System.out.println(
+                        "\n--- Data Pemilik ---"
+                );
 
                 String namaPemilikBaru;
 
                 while (true) {
 
-                    System.out.print("Nama Pemilik Baru: ");
-                    namaPemilikBaru = scanner.nextLine();
+                    System.out.print(
+                            "Nama Pemilik Baru: "
+                    );
 
-                    if (namaPemilikBaru.isEmpty()) {
-                        System.out.println(">> Nama pemilik tidak boleh kosong!");
-                    }
-                    else {
+                    namaPemilikBaru =
+                            scanner.nextLine();
+
+                    if (
+                            namaPemilikBaru.isEmpty()
+                    ) {
+
+                        System.out.println(
+                                ">> Nama pemilik "
+                                + "tidak boleh kosong!"
+                        );
+
+                    } else {
+
                         break;
                     }
                 }
@@ -407,43 +748,76 @@ public class Service {
 
                 while (true) {
 
-                    System.out.print("No. Telepon Baru: ");
-                    noTeleponBaru = scanner.nextLine();
+                    System.out.print(
+                            "No. Telepon Baru: "
+                    );
 
-                    if (noTeleponBaru.isEmpty()) {
+                    noTeleponBaru =
+                            scanner.nextLine();
+
+                    if (
+                            noTeleponBaru.isEmpty()
+                    ) {
+
                         System.out.println(
-                                ">> No. telepon tidak boleh kosong!"
+                                ">> No. telepon "
+                                + "tidak boleh kosong!"
                         );
-                    }
-                    else if (noTeleponBaru.length() < 10) {
+
+                    } else if (
+                            noTeleponBaru.length() < 10
+                    ) {
+
                         System.out.println(
-                                ">> No. telepon minimal 10 digit!"
+                                ">> No. telepon "
+                                + "minimal 10 digit!"
                         );
-                    }
-                    else if (noTeleponBaru.length() > 13) {
+
+                    } else if (
+                            noTeleponBaru.length() > 13
+                    ) {
+
                         System.out.println(
-                                ">> No. telepon maksimal 13 digit!"
+                                ">> No. telepon "
+                                + "maksimal 13 digit!"
                         );
-                    }
-                    else {
+
+                    } else {
+
                         break;
                     }
                 }
 
-                // Update Hewan
-                System.out.println("\n--- Data Hewan ---");
+                // =================================================
+                // UPDATE HEWAN
+                // =================================================
+
+                System.out.println(
+                        "\n--- Data Hewan ---"
+                );
 
                 String namaHewanBaru;
 
                 while (true) {
 
-                    System.out.print("Nama Hewan Baru: ");
-                    namaHewanBaru = scanner.nextLine();
+                    System.out.print(
+                            "Nama Hewan Baru: "
+                    );
 
-                    if (namaHewanBaru.isEmpty()) {
-                        System.out.println(">> Nama hewan tidak boleh kosong!");
-                    }
-                    else {
+                    namaHewanBaru =
+                            scanner.nextLine();
+
+                    if (
+                            namaHewanBaru.isEmpty()
+                    ) {
+
+                        System.out.println(
+                                ">> Nama hewan "
+                                + "tidak boleh kosong!"
+                        );
+
+                    } else {
+
                         break;
                     }
                 }
@@ -452,98 +826,203 @@ public class Service {
 
                 while (true) {
 
-                    System.out.print("Umur Baru: ");
+                    System.out.print(
+                            "Umur Baru: "
+                    );
 
                     if (scanner.hasNextInt()) {
 
-                        umurBaru = scanner.nextInt();
+                        umurBaru =
+                                scanner.nextInt();
+
                         scanner.nextLine();
 
                         if (umurBaru < 0) {
-                            System.out.println(">> Umur tidak boleh negatif!");
-                        }
-                        else {
+
+                            System.out.println(
+                                    ">> Umur tidak "
+                                    + "boleh negatif!"
+                            );
+
+                        } else {
+
                             break;
                         }
 
-                    }
-                    else {
-                        System.out.println(">> Umur harus berupa angka!");
+                    } else {
+
+                        System.out.println(
+                                ">> Umur harus "
+                                + "berupa angka!"
+                        );
+
                         scanner.nextLine();
                     }
                 }
 
-                // Update data umum Hewan
-                h.setNamaHewan(namaHewanBaru);
-                h.setUmur(umurBaru);
+                h.setNamaHewan(
+                        namaHewanBaru
+                );
 
-                // Update Status Vaksin Kucing
-                if (h instanceof Kucing) {
+                h.setUmur(
+                        umurBaru
+                );
+
+                // =================================================
+                // UPDATE KUCING PERSIA
+                // =================================================
+
+                if (h instanceof KucingPersia) {
 
                     String statusVaksinF3Baru;
 
                     while (true) {
 
-                        System.out.print("Status Vaksin F3 Baru: ");
+                        System.out.print(
+                                "Status Vaksin F3 Baru: "
+                        );
 
-                        statusVaksinF3Baru = scanner.nextLine();
+                        statusVaksinF3Baru =
+                                scanner.nextLine();
 
-                        if (statusVaksinF3Baru.isEmpty()) {
-                            System.out.println(">> Status vaksin F3 tidak boleh kosong!");
-                        }
-                        else {
+                        if (
+                                statusVaksinF3Baru
+                                        .isEmpty()
+                        ) {
+
+                            System.out.println(
+                                    ">> Status vaksin F3 "
+                                    + "tidak boleh kosong!"
+                            );
+
+                        } else {
+
                             break;
                         }
                     }
 
-                    Kucing kucing = (Kucing) h;
+                    KucingPersia kucingPersia =
+                            (KucingPersia) h;
+
+                    kucingPersia.setStatusVaksinF3(
+                            statusVaksinF3Baru
+                    );
+
+                // =================================================
+                // UPDATE KUCING
+                // =================================================
+
+                } else if (
+                        h instanceof Kucing
+                ) {
+
+                    String statusVaksinF3Baru;
+
+                    while (true) {
+
+                        System.out.print(
+                                "Status Vaksin F3 Baru: "
+                        );
+
+                        statusVaksinF3Baru =
+                                scanner.nextLine();
+
+                        if (
+                                statusVaksinF3Baru
+                                        .isEmpty()
+                        ) {
+
+                            System.out.println(
+                                    ">> Status vaksin F3 "
+                                    + "tidak boleh kosong!"
+                            );
+
+                        } else {
+
+                            break;
+                        }
+                    }
+
+                    Kucing kucing =
+                            (Kucing) h;
 
                     kucing.setStatusVaksinF3(
                             statusVaksinF3Baru
                     );
-                }
 
-                // Update Status Vaksin Anjing
-                else if (h instanceof Anjing) {
+                // =================================================
+                // UPDATE ANJING
+                // =================================================
+
+                } else if (
+                        h instanceof Anjing
+                ) {
 
                     String statusVaksinRabiesBaru;
 
                     while (true) {
 
-                        System.out.print("Status Vaksin Rabies Baru: ");
+                        System.out.print(
+                                "Status Vaksin Rabies Baru: "
+                        );
 
                         statusVaksinRabiesBaru =
                                 scanner.nextLine();
 
-                        if (statusVaksinRabiesBaru.isEmpty()) {
-                            System.out.println(">> Status vaksin rabies tidak boleh kosong!");
-                        }
-                        else {
+                        if (
+                                statusVaksinRabiesBaru
+                                        .isEmpty()
+                        ) {
+
+                            System.out.println(
+                                    ">> Status vaksin rabies "
+                                    + "tidak boleh kosong!"
+                            );
+
+                        } else {
+
                             break;
                         }
                     }
 
-                    Anjing anjing = (Anjing) h;
+                    Anjing anjing =
+                            (Anjing) h;
 
                     anjing.setStatusVaksinRabies(
                             statusVaksinRabiesBaru
                     );
                 }
 
-                // Update Pemeriksaan
-                System.out.println("\n--- Data Pemeriksaan ---");
+                // =================================================
+                // UPDATE PEMERIKSAAN
+                // =================================================
+
+                System.out.println(
+                        "\n--- Data Pemeriksaan ---"
+                );
 
                 String keluhanBaru;
 
                 while (true) {
 
-                    System.out.print("Keluhan Baru: ");
-                    keluhanBaru = scanner.nextLine();
+                    System.out.print(
+                            "Keluhan Baru: "
+                    );
 
-                    if (keluhanBaru.isEmpty()) {
-                        System.out.println(">> Keluhan tidak boleh kosong!");
-                    }
-                    else {
+                    keluhanBaru =
+                            scanner.nextLine();
+
+                    if (
+                            keluhanBaru.isEmpty()
+                    ) {
+
+                        System.out.println(
+                                ">> Keluhan tidak "
+                                + "boleh kosong!"
+                        );
+
+                    } else {
+
                         break;
                     }
                 }
@@ -552,30 +1031,57 @@ public class Service {
 
                 while (true) {
 
-                    System.out.print("Diagnosa Baru: ");
-                    diagnosaBaru = scanner.nextLine();
+                    System.out.print(
+                            "Diagnosa Baru: "
+                    );
 
-                    if (diagnosaBaru.isEmpty()) {
-                        System.out.println(">> Diagnosa tidak boleh kosong!");
-                    }
-                    else {
+                    diagnosaBaru =
+                            scanner.nextLine();
+
+                    if (
+                            diagnosaBaru.isEmpty()
+                    ) {
+
+                        System.out.println(
+                                ">> Diagnosa tidak "
+                                + "boleh kosong!"
+                        );
+
+                    } else {
+
                         break;
                     }
                 }
 
                 // Set data pemilik
-                p.setNamaPemilik(namaPemilikBaru);
-                p.setNoTelepon(noTeleponBaru);
+                p.setNamaPemilik(
+                        namaPemilikBaru
+                );
+
+                p.setNoTelepon(
+                        noTeleponBaru
+                );
 
                 // Set data pemeriksaan
-                pm.setKeluhan(keluhanBaru);
-                pm.setDiagnosa(diagnosaBaru);
+                pm.setKeluhan(
+                        keluhanBaru
+                );
 
-                System.out.println("\n>> Data klinik berhasil diperbarui!");
+                pm.setDiagnosa(
+                        diagnosaBaru
+                );
+
+                System.out.println(
+                        "\n>> Data klinik "
+                        + "berhasil diperbarui!"
+                );
+
                 return;
             }
         }
 
-        System.out.println(">> Data tidak ditemukan!");
+        System.out.println(
+                ">> Data tidak ditemukan!"
+        );
     }
 }
