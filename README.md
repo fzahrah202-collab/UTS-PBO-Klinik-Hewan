@@ -1,4 +1,4 @@
-# Minpro-2-PBO-Sistem-Manajemen-Klinik-Hewan
+# UTS-PBO-Sistem-Manajemen-Klinik-Hewan
 
 ## Deskripsi Singkat Program
 
@@ -17,7 +17,8 @@ Program ini dapat digunakan untuk:
 
 Program memiliki struktur package sebagai berikut:
 
-<img width="349" height="272" alt="image" src="https://github.com/user-attachments/assets/81cca249-2c4c-434d-a618-c99573d362b6" />
+<img width="403" height="335" alt="image" src="https://github.com/user-attachments/assets/853855ed-a720-47f8-9abe-81fdca69fad8" />
+
 
 1. Package com.mycompany.klinikhewan
 
@@ -40,6 +41,7 @@ Berisi class yang digunakan untuk menyimpan data dan mengatur proses program, ya
 - `Anjing` : subclass dari Hewan.
 - `Pemilik` : menyimpan data pemilik hewan.
 - `Pemeriksaan` : menyimpan data pemeriksaan hewan.
+- `KucingPersia` : subclass dari Kucing yang digunakan untuk merepresentasikan kucing dengan ras Persia.
 
 ---
 
@@ -53,7 +55,7 @@ Pengguna dapat memilih menu sesuai kebutuhan.
 
 ### 1. Tambah Data
 
-<img width="416" height="480" alt="image" src="https://github.com/user-attachments/assets/dba0b602-1b17-484e-9ee9-7802672116f1" />
+<img width="401" height="721" alt="image" src="https://github.com/user-attachments/assets/c732f7fb-c204-4fd9-b0a0-d51adad6a3a2" />
 
 Pada menu tambah data, pengguna memasukkan:
 
@@ -72,6 +74,7 @@ Data Hewan:
 Jika jenis hewan adalah:
 
 - Kucing, maka pengguna mengisi status vaksin F3.
+- Kucing Persia, maka pengguna mengisi status vaksin F3 dan ras otomatis ditetapkan sebagai Persia.
 - Anjing, maka pengguna mengisi status vaksin rabies.
 - Jenis hewan lainnya tidak meminta data vaksin tersebut.
 
@@ -94,7 +97,9 @@ Data yang ditampilkan meliputi:
 - Data pemilik
 - Data hewan
 - Jenis hewan
-- Status vaksin untuk Kucing atau Anjing
+- Status vaksin F3 untuk Kucing dan Kucing Persia
+- Status vaksin rabies untuk Anjing
+- Ras Persia untuk objek KucingPersia
 - Data pemeriksaan
 
 Program juga sudah memiliki dummy data awal sehingga saat menu tampilkan data dijalankan, data sudah langsung tersedia tanpa harus melakukan input terlebih dahulu.
@@ -129,10 +134,12 @@ Jika ID ditemukan, pengguna dapat memperbarui:
 - Nomor telepon
 - Nama hewan
 - Umur hewan
-- Status vaksin F3 untuk Kucing
+- Status vaksin F3 untuk Kucing dan Kucing Persia
 - Status vaksin rabies untuk Anjing
 - Keluhan
 - Diagnosa
+
+Untuk Kucing Persia, ras tidak perlu diinput karena ras sudah ditentukan otomatis oleh class `KucingPersia`.
 
 Setelah proses selesai, data akan diperbarui di dalam ArrayList.
 
@@ -169,13 +176,23 @@ Encapsulation juga diterapkan pada class:
 
 - `Hewan`
 - `Kucing`
+- `KucingPersia`
 - `Anjing`
 - `Pemilik`
 - `Pemeriksaan`
 
 ### 3. Inheritance
 
-Inheritance diterapkan dengan menggunakan class Hewan sebagai superclass dan memiliki dua subclass, yaitu Class `Kucing` dan `Anjing`.
+Inheritance diterapkan pada program dengan menggunakan class `Hewan` sebagai superclass. Class turunan mewarisi atribut dan method yang dimiliki oleh superclass.
+
+Program menerapkan dua tipe inheritance, yaitu **Hierarchical Inheritance** dan **Multilevel Inheritance**.
+
+### a. Hierarchical Inheritance
+
+Hierarchical inheritance terjadi ketika satu superclass memiliki lebih dari satu subclass.
+
+Pada program ini, class `Hewan` memiliki dua subclass langsung, yaitu `Kucing` dan `Anjing`.
+
 Class `Kucing` dan `Anjing` menggunakan keyword extends:
 
 <img width="436" height="36" alt="image" src="https://github.com/user-attachments/assets/4f3fac81-a5e5-400a-889a-dca2f6f75db2" />
@@ -197,6 +214,22 @@ Atribut tersebut digunakan untuk menyimpan status vaksin F3 pada kucing.
 <img width="453" height="39" alt="image" src="https://github.com/user-attachments/assets/b692ae30-3753-497a-a8c5-694ea53d9d88" />
 
 Atribut tersebut digunakan untuk menyimpan status vaksin rabies pada anjing.
+
+b. Multilevel Inheritance
+
+Multilevel inheritance terjadi ketika sebuah subclass memiliki subclass lain.
+
+Pada program ini, hubungan multilevel inheritance diterapkan melalui class Hewan, Kucing, dan KucingPersia.
+
+Class `KucingPersia` merupakan subclass dari `Kucing`:
+
+<img width="381" height="36" alt="image" src="https://github.com/user-attachments/assets/0c3f35fb-e7fd-4c77-aedb-0935641b122f" />
+
+Dengan demikian, KucingPersia mewarisi atribut dan method dari Kucing, yang sebelumnya juga mewarisi atribut dan method dari Hewan.
+
+Class KucingPersia digunakan untuk merepresentasikan kucing dengan ras Persia. Ras Persia ditentukan secara otomatis oleh program sehingga pengguna tidak perlu memasukkan ras secara manual.
+
+Dengan penerapan tersebut, program memiliki dua tipe inheritance, yaitu Hierarchical Inheritance dan Multilevel Inheritance.
 
 ### 4. Validasi Input
 
@@ -263,35 +296,50 @@ Contohnya:
 
 Dummy data tersebut digunakan agar ketika program pertama kali dijalankan dan pengguna memilih menu Tampilkan Data, data sudah langsung tersedia tanpa harus melakukan input terlebih dahulu.
 
-### Nilai Tambah
 ### Polymorphism
 
-Program menerapkan polymorphism melalui method overriding.
+Program menerapkan polymorphism melalui dua bentuk, yaitu method overriding dan method overloading.
 
-Pada superclass `Hewan` terdapat method:
+**a. Method Overriding**
 
-<img width="457" height="79" alt="image" src="https://github.com/user-attachments/assets/ddc97ecd-41ca-4c87-b1a4-921b1344db43" />
+Method overriding diterapkan ketika subclass memiliki method dengan nama dan parameter yang sama seperti method pada superclass.
 
-Method tersebut kemudian dioverride oleh subclass `Kucing`:
+Pada class `Hewan` terdapat method tampilkanInfo():
 
-<img width="475" height="98" alt="image" src="https://github.com/user-attachments/assets/e39c5746-7106-4a36-9a7e-01baccf351ff" />
+<img width="406" height="58" alt="image" src="https://github.com/user-attachments/assets/7cb86d0a-f36c-4249-bdcb-da8e76489a7b" />
 
-dan subclass `Anjing`:
+Pada class `Kucing`, method tersebut dioverride:
 
-<img width="482" height="83" alt="image" src="https://github.com/user-attachments/assets/fc8e7cb6-5dd7-4b4a-a77a-f908931cc007" />
+<img width="417" height="89" alt="image" src="https://github.com/user-attachments/assets/c3f355a8-99e7-410f-9585-1ab5693097bb" />
 
-Pemanggilan polymorphism dilakukan pada class Service:
+Pada class `Anjing`, method tersebut juga dioverride:
 
-<img width="456" height="42" alt="image" src="https://github.com/user-attachments/assets/b47d1c17-59b6-4e34-9cff-99d1259e33f1" />
+<img width="428" height="77" alt="image" src="https://github.com/user-attachments/assets/8265590f-cf87-4496-b613-22f2d291bbd1" />
 
+Pada class `KucingPersia`, method tampilkanInfo() kembali dioverride:
 
-<img width="444" height="113" alt="image" src="https://github.com/user-attachments/assets/fc20397e-7da1-4411-9ddb-3e2246ec1ef6" />
+<img width="394" height="125" alt="image" src="https://github.com/user-attachments/assets/48cd602b-ae89-464d-92bf-3e6dfadeca0a" />
 
-Walaupun variabel menggunakan tipe Hewan, method yang dijalankan akan menyesuaikan objek sebenarnya.
+Pemanggilan method polymorphism dilakukan pada class `Service`:
 
-Jika objek merupakan Kucing, maka tampilkanInfo() milik Kucing akan dijalankan.
+<img width="378" height="29" alt="image" src="https://github.com/user-attachments/assets/4ce5bdb4-759f-40f4-bdd2-e6acada39f50" />
 
-Jika objek merupakan Anjing, maka tampilkanInfo() milik Anjing akan dijalankan.
+<img width="306" height="37" alt="image" src="https://github.com/user-attachments/assets/edfb287f-8b2c-4fe9-9db9-f65bd0a44ce5" />
 
-Dengan demikian, program menerapkan polymorphism melalui method overriding.
+Dengan demikian, method yang dijalankan akan menyesuaikan dengan objek sebenarnya, seperti `Kucing`, `Anjing`, atau `KucingPersia`.
 
+**b. Method Overloading**
+
+Method overloading diterapkan pada class Hewan dengan menggunakan nama method yang sama tetapi memiliki parameter yang berbeda.
+
+Method pertama:
+
+<img width="510" height="76" alt="image" src="https://github.com/user-attachments/assets/c99fff77-6731-40d7-8507-0d685de61d74" />
+
+Method kedua:
+
+<img width="520" height="103" alt="image" src="https://github.com/user-attachments/assets/3dfe481a-5fdb-4144-b3c5-cf8ce30e8531" />
+
+Perbedaan parameter tersebut menunjukkan penerapan method overloading pada class `Hewan`.
+
+Dengan demikian, program menerapkan dua bentuk polymorphism, yaitu method overriding dan method overloading.
